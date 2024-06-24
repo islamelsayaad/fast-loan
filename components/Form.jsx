@@ -110,7 +110,7 @@ const Form = () => {
   };
 
   return (
-    <div className="w-full  h-[1600px] grid grid-cols-1 grid-rows-2 gap-10 p-8 justify-center lg:py-20 lg:grid-cols-2 lg:grid-rows-1 lg:gap-16 lg:h-[740px]">
+    <div className="w-full h-[1600px] grid grid-cols-1 grid-rows-2 gap-10 p-8 justify-center lg:py-20 lg:grid-cols-2 lg:grid-rows-1 lg:gap-16 lg:h-[740px]">
       <Card className="w-full h-full flex flex-col justify-center gap-3">
         <CardHeader>
           <CardTitle>Request a loan</CardTitle>
