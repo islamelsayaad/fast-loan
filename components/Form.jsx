@@ -110,7 +110,7 @@ const Form = () => {
 
   return (
     <div className="w-full h-full grid grid-cols-1 grid-rows-2 gap-10 p-8 justify-center items-center lg:py-20 lg:grid-cols-2 lg:grid-rows-1 lg:gap-16">
-      <Card className="w-full h-[580px] flex flex-col justify-center gap-3">
+      <Card className="w-full h-[600px] max-h-fit flex flex-col justify-center gap-3">
         <CardHeader>
           <CardTitle>Request a loan</CardTitle>
           <CardDescription>
@@ -231,7 +231,7 @@ const Form = () => {
           </form>
         </CardContent>
       </Card>
-      <Card className="pt-5 overflow-y-auto w-full h-full max-h-[580px] scroll-smooth">
+      <Card className="pt-5 overflow-y-auto w-full h-full max-h-[600px] scroll-smooth">
         <CardContent className="w-full h-fit flex flex-col items-center gap-3">
           {/* No Requests Yet */}
           {data.map((item) => {
