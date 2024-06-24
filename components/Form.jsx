@@ -120,7 +120,7 @@ const Form = () => {
         <CardContent>
           <form onSubmit={handleSubmit}>
             <div className="w-full flex flex-col gap-7">
-              <div className="grid grid-cols-2 gap-6">
+              <div className="grid grid-cols-1 grid-rows-2 gap-6 sm:grid-cols-2 sm:grid-rows-1">
                 <div className="field">
                   <Label htmlFor="firstName">First Name</Label>
                   <Input
@@ -146,7 +146,7 @@ const Form = () => {
                   />
                 </div>
               </div>
-              <div className="grid grid-cols-2 gap-6">
+              <div className="grid grid-cols-1 grid-rows-2 gap-6 xs:grid-cols-2 xs:grid-rows-1">
                 <div className="field">
                   <Label htmlFor="age">Age</Label>
                   <Input
@@ -225,7 +225,7 @@ const Form = () => {
           </form>
         </CardContent>
       </Card>
-      <Card className="py-7 overflow-y-auto">
+      <Card className="py-8 overflow-y-auto">
         <CardContent className="w-full h-full flex flex-col items-center gap-3">
           {data.map((item, index) => {
             return (
