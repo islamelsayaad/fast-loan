@@ -63,8 +63,8 @@ const Form = () => {
     const isAmountValid = form.amount >= 100 && form.amount <= 100000;
     const hasAgreedToTerms = form.checked;
     const isCountrySelected = form.country !== "";
-    const isFirstNameValid = form.firstName.length > 3;
-    const isLastNameValid = form.lastName.length > 3;
+    const isFirstNameValid = form.firstName.length > 2;
+    const isLastNameValid = form.lastName.length > 2;
 
     return (
       isAgeValid &&
@@ -107,10 +107,31 @@ const Form = () => {
       amount: "",
       checked: false,
     });
+    data = [];
+  };
+
+  const setData = () => {
+    if (data != []) {
+      return data.map((item, index) => {
+        return (
+          <Alert key={index} className="flex flex-col gap-1 animate-opacity">
+            <RocketIcon className="h-4 w-4" />
+            <AlertTitle>Request Successful!</AlertTitle>
+            <AlertDescription>
+              {item.firstName} {item.lastName} request {item.amount}$ has been
+              successfully processed.
+            </AlertDescription>
+          </Alert>
+        );
+      });
+    }
+    return (
+      <p className="text-[0.8rem] text-muted-foreground">No Requests Yet!</p>
+    );
   };
 
   return (
-    <div className="w-full h-[1600px] grid grid-cols-1 grid-rows-2 gap-10 p-8 justify-center lg:py-20 lg:grid-cols-2 lg:grid-rows-1 lg:gap-16 lg:h-[740px]">
+    <div className="w-full h-[1620px] grid grid-cols-1 grid-rows-2 gap-10 p-8 justify-center lg:py-20 lg:grid-cols-2 lg:grid-rows-1 lg:gap-16 lg:h-[740px]">
       <Card className="w-full h-full flex flex-col justify-center gap-3">
         <CardHeader>
           <CardTitle>Request a loan</CardTitle>
@@ -220,10 +241,7 @@ const Form = () => {
                 <Button
                   type="reset"
                   variant="outline"
-                  onClick={() => {
-                    handleFormReset();
-                    data = [];
-                  }}
+                  onClick={() => handleFormReset()}
                 >
                   Clear
                 </Button>
@@ -232,25 +250,8 @@ const Form = () => {
           </form>
         </CardContent>
       </Card>
-      <Card className="pt-5 overflow-y-auto w-full h-full scroll-smooth">
-        <CardContent className="w-full h-fit flex flex-col items-center gap-3">
-          {/* No Requests Yet */}
-          {data.map((item, index) => {
-            return (
-              <Alert
-                key={index}
-                className="flex flex-col gap-1 animate-opacity"
-              >
-                <RocketIcon className="h-4 w-4" />
-                <AlertTitle>Request Successful!</AlertTitle>
-                <AlertDescription>
-                  {item.firstName} {item.lastName} request {item.amount}$ has
-                  been successfully processed.
-                </AlertDescription>
-              </Alert>
-            );
-          })}
-        </CardContent>
+      <Card className="p-5 overflow-y-auto w-full h-full flex flex-col items-center gap-3 scroll-smooth">
+        {setData()}
       </Card>
     </div>
   );
