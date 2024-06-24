@@ -59,7 +59,7 @@ const Form = () => {
   });
 
   const isEligibleForLoan = (form) => {
-    const isAgeValid = form.age > 18 && form.age < 60;
+    const isAgeValid = form.age >= 18 && form.age <= 60;
     const isAmountValid = form.amount >= 100 && form.amount <= 100000;
     const hasAgreedToTerms = form.checked;
     const isCountrySelected = form.country !== "";
@@ -93,7 +93,7 @@ const Form = () => {
     e.preventDefault();
     if (isEligibleForLoan(form)) {
       data.push(form);
-      handleFormReset();
+      // handleFormReset();
     }
   };
 
@@ -109,8 +109,8 @@ const Form = () => {
   };
 
   return (
-    <>
-      <Card className="w-full h-full py-2 flex flex-col justify-center gap-3">
+    <div className="w-full h-full grid grid-cols-1 grid-rows-2 gap-10 p-8 justify-center items-center lg:py-20 lg:grid-cols-2 lg:grid-rows-1 lg:gap-16">
+      <Card className="w-full h-[580px] flex flex-col justify-center gap-3">
         <CardHeader>
           <CardTitle>Request a loan</CardTitle>
           <CardDescription>
@@ -120,7 +120,7 @@ const Form = () => {
         <CardContent>
           <form onSubmit={handleSubmit}>
             <div className="w-full flex flex-col gap-7">
-              <div className="grid grid-cols-1 grid-rows-2 gap-6 sm:grid-cols-2 sm:grid-rows-1">
+              <div className="flex flex-col gap-6 w-full sm:flex-row">
                 <div className="field">
                   <Label htmlFor="firstName">First Name</Label>
                   <Input
@@ -130,7 +130,10 @@ const Form = () => {
                     placeholder="Enter your first name"
                     value={form.firstName}
                     onChange={handleInputChange}
-                    className="capitalize"
+                    required
+                    minLength="4"
+                    maxLength="8"
+                    size="10"
                   />
                 </div>
                 <div className="field">
@@ -142,21 +145,24 @@ const Form = () => {
                     placeholder="Enter your last name"
                     value={form.lastName}
                     onChange={handleInputChange}
-                    className="capitalize"
+                    required
+                    minLength="4"
+                    maxLength="8"
+                    size="10"
                   />
                 </div>
               </div>
-              <div className="grid grid-cols-1 grid-rows-2 gap-6 xs:grid-cols-2 xs:grid-rows-1">
+              <div className="flex flex-col gap-6 w-full sm:flex-row">
                 <div className="field">
                   <Label htmlFor="age">Age</Label>
                   <Input
                     id="age"
                     name="age"
                     type="number"
-                    maxLength={2}
                     placeholder="Enter your age"
                     value={form.age}
                     onChange={handleInputChange}
+                    min="0"
                   />
                   <p className="text-[0.8rem] text-muted-foreground">
                     Ensure the age is within the range of 18 to 60.
@@ -189,10 +195,10 @@ const Form = () => {
                   id="amount"
                   name="amount"
                   type={"number"}
-                  maxLength={100000}
                   placeholder="Enter the amount you need"
                   value={form.amount}
                   onChange={handleInputChange}
+                  min="0"
                 />
                 <p className="text-[0.8rem] text-muted-foreground">
                   Ensure the amount is within the range of $100 to $100,000.
@@ -225,12 +231,13 @@ const Form = () => {
           </form>
         </CardContent>
       </Card>
-      <Card className="py-8 overflow-y-auto">
-        <CardContent className="w-full h-full flex flex-col items-center gap-3">
-          {data.map((item, index) => {
+      <Card className="pt-5 overflow-y-auto w-full h-full max-h-[580px] scroll-smooth">
+        <CardContent className="w-full h-fit flex flex-col items-center gap-3">
+          {/* No Requests Yet */}
+          {data.map((item) => {
             return (
               <Alert
-                key={index}
+                key={item.firstName}
                 className="flex flex-col gap-1 animate-opacity"
               >
                 <RocketIcon className="h-4 w-4" />
@@ -244,7 +251,7 @@ const Form = () => {
           })}
         </CardContent>
       </Card>
-    </>
+    </div>
   );
 };
 
